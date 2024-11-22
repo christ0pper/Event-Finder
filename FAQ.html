@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='faq.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>Frequently Asked Questions</h1>
+        <p>Find answers to the most common questions about our platform and services.</p>
+    </header>
+
+    <section class="faq-section">
+        <h2>Common Questions</h2>
+
+        <div class="faq-item">
+            <h3>What is the referral program?</h3>
+            <p>The referral program allows you to earn rewards by referring others to our platform. Share your unique referral link and earn rewards when your referrals complete the required actions.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How can I track my referrals?</h3>
+            <p>You can track your referrals through your account dashboard. It will show you the number of people you've referred and the rewards you've earned.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Are there any limitations on the number of referrals I can make?</h3>
+            <p>No, there is no limit to the number of people you can refer. The more people you refer, the more rewards you can earn!</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How do I redeem my rewards?</h3>
+            <p>Once you’ve earned enough rewards, you can redeem them in your account settings. Choose from various options, such as gift cards or cash payouts.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I share my referral link on social media?</h3>
+            <p>Yes, you're encouraged to share your referral link on social media platforms to increase your chances of earning rewards.</p>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Eventure. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Toggle FAQ answers on click
+        const faqItems = document.querySelectorAll('.faq-item h3');
+        faqItems.forEach(item => {
+            item.addEventListener('click', function() {
+                this.parentElement.classList.toggle('active');
+            });
+        });
+    </script>
+
+</body>
+</html>

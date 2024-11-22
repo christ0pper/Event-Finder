@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Listings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id="header-container">
+        <header>
+            <h2>Eventure</h2>
+            <input type="text" id="search-bar" placeholder="Search for events..." onkeyup="filterEvents()">
+            <button id="menu-toggle">☰</button>
+        </header>
+    </div>
+    
+    <div id="filter-container">
+        <div id="distance-filter">
+            <button class="filter-btn" data-place="Kochi" onclick="applyPlaceFilter('Kochi')">Kochi</button>
+            <button class="filter-btn" data-place="Bangalore" onclick="applyPlaceFilter('Bangalore')">Bangalore</button>
+            <button class="filter-btn" data-place="Mumbai" onclick="applyPlaceFilter('Mumbai')">Mumbai</button>
+            <button class="filter-btn" data-place="Delhi" onclick="applyPlaceFilter('Delhi')">Delhi</button>
+        </div>
+    </div>
+    
+    <div id="filter-container">
+        <div id="distance-filter">
+            <button class="filter-btn" data-distance="5" onclick="applyDistanceFilter(5)">5 km</button>
+            <button class="filter-btn" data-distance="10" onclick="applyDistanceFilter(10)">10 km</button>
+            <button class="filter-btn" data-distance="20" onclick="applyDistanceFilter(20)">20 km</button>
+            <button class="filter-btn" data-distance="50" onclick="applyDistanceFilter(50)">50 km</button>
+        </div>
+    </div>
+
+    {% set party_events = events | selectattr("Category", "equalto", "Party") | list %}
+    {% set concert_events = events | selectattr("Category", "equalto", "Concert") | list %}
+    {% set standup_events = events | selectattr("Category", "equalto", "Stand up") | list %}
+    {% set openmic_events = events | selectattr("Category", "equalto", "Open Mic") | list %}
+    {% set other_events = events | selectattr("Category", "equalto", "Other") | list %}
+
+    {% if party_events %}
+    <div class="event-section">
+        <h2>Party</h2>
+        <div class="event-row">
+            {% for event in party_events %}
+                <div class="event-card">
+                    <h3>{{ event.Name }}</h3>
+                    <p>Date: {{ event.Date.strftime('%Y-%m-%d') }}</p>
+                    <p>Time: {{ event.Time }}</p>
+                    <p>Place: {{ event.Place }}</p>
+                    <p>Distance: {{ event.Distance }} km from {{ event.Checkpoint }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if concert_events %}
+    <div class="event-section">
+        <h2>Concerts</h2>
+        <div class="event-row">
+            {% for event in concert_events %}
+                <div class="event-card">
+                    <h3>{{ event.Name }}</h3>
+                    <p>Date: {{ event.Date.strftime('%Y-%m-%d') }}</p>
+                    <p>Time: {{ event.Time }}</p>
+                    <p>Place: {{ event.Place }}</p>
+                    <p>Distance: {{ event.Distance }} km from {{ event.Checkpoint }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if standup_events %}
+    <div class="event-section">
+        <h2>Stand Ups</h2>
+        <div class="event-row">
+            {% for event in standup_events %}
+                <div class="event-card">
+                    <h3>{{ event.Name }}</h3>
+                    <p>Date: {{ event.Date.strftime('%Y-%m-%d') }}</p>
+                    <p>Time: {{ event.Time }}</p>
+                    <p>Place: {{ event.Place }}</p>
+                    <p>Distance: {{ event.Distance }} km from {{ event.Checkpoint }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if openmic_events %}
+    <div class="event-section">
+        <h2>Open Mic</h2>
+        <div class="event-row">
+            {% for event in openmic_events %}
+                <div class="event-card">
+                    <h3>{{ event.Name }}</h3>
+                    <p>Date: {{ event.Date.strftime('%Y-%m-%d') }}</p>
+                    <p>Time: {{ event.Time }}</p>
+                    <p>Place: {{ event.Place }}</p>
+                    <p>Distance: {{ event.Distance }} km from {{ event.Checkpoint }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if other_events %}
+    <div class="event-section">
+        <h2>Others</h2>
+        <div class="event-row">
+            {% for event in other_events %}
+                <div class="event-card">
+                    <h3>{{ event.Name }}</h3>
+                    <p>Date: {{ event.Date.strftime('%Y-%m-%d') }}</p>
+                    <p>Time: {{ event.Time }}</p>
+                    <p>Place: {{ event.Place }}</p>
+                    <p>Distance: {{ event.Distance }} km from {{ event.Checkpoint }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
+</body>
+<footer>
+    <p>&copy; 2024 Eventure. All rights reserved.</p>
+</footer>
+</html>

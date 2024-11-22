@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host Event</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='event_hosting.css') }}">
+    <script>
+        // Function to update the landmark based on the selected place
+        function updateLandmark() {
+            const place = document.getElementById('place').value;
+            const landmarkField = document.getElementById('landmark');
+            const landmarks = {
+                "Kochi": "Lulu Mall",
+                "Bangalore": "Cubbon Park",
+                "Mumbai": "Marine Drive",
+                "Delhi": "India Gate"
+            };
+            landmarkField.value = landmarks[place] || "";
+        }
+
+        // Function to show the confirmation box with the event details
+        function showConfirmation(event) {
+            event.preventDefault();  // Prevent the form from submitting immediately
+
+            // Get the event details from the form
+            const eventName = document.getElementById('name').value;
+            const category = document.getElementById('category').value;
+            const place = document.getElementById('place').value;
+            const distance = document.getElementById('distance').value;
+
+            // Create the confirmation message dynamically
+            const confirmationBox = document.getElementById('confirmation-box');
+            confirmationBox.innerHTML = `
+                <p><strong>Event Name:</strong> ${eventName}</p>
+                <p><strong>Category:</strong> ${category}</p>
+                <p><strong>Place:</strong> ${place}</p>
+                <p><strong>Distance from Landmark:</strong> ${distance} km</p>
+                <button onclick="confirmSubmission()">Confirm</button>
+                <button type="button" onclick="hideConfirmation()" class="cancel-btn">Cancel</button>
+            `;
+            confirmationBox.style.display = 'block';  // Display the confirmation box
+        }
+
+        // Function to confirm the submission and redirect to the confirmation page
+        function confirmSubmission() {
+            // Hide the confirmation box
+            document.getElementById('confirmation-box').style.display = 'none';
+
+            // Redirect to the confirmation2 page
+            window.location.href = "/confirmation2";  // Assuming your Flask route for confirmation2 is set up
+        }
+
+        // Function to hide the confirmation box if the user clicks cancel
+        function hideConfirmation() {
+            document.getElementById('confirmation-box').style.display = 'none';
+        }
+
+        // Call updateLandmark when the page loads to set the initial landmark value
+        document.addEventListener('DOMContentLoaded', updateLandmark);
+    </script>
+</head>
+<body>
+    <h2>Host an Event</h2>
+    <form id="eventForm" method="POST" action="/host" onsubmit="return handleFormSubmission(event)">
+        <label for="name">Event Name:</label>
+        <input type="text" name="name" id="name" required><br>
+    
+        <label for="category">Category:</label>
+        <select name="category" id="category" required>
+            <option value="Party">Party</option>
+            <option value="Concerts">Concerts</option>
+            <option value="Open Mic">Open Mic</option>
+            <option value="Stand Up">Stand Up</option>
+            <option value="Other">Other</option>
+        </select><br>
+    
+        <label for="date">Date:</label>
+        <input type="date" name="date" id="date" required><br>
+    
+        <label for="time">Time:</label>
+        <input type="time" name="time" id="time" required><br>
+    
+        <label for="place">Place:</label>
+        <select name="place" id="place" onchange="updateLandmark()" required>
+            <option value="Kochi">Kochi</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Delhi">Delhi</option>
+        </select><br>
+    
+        <label for="landmark">Landmark:</label>
+        <input type="text" name="landmark" id="landmark" readonly><br>
+    
+        <label for="distance">Distance from Landmark (in km):</label>
+        <input type="number" name="distance" id="distance" required><br>
+    
+        <button type="submit">Submit</button>
+    </form>
+    
+
+    <!-- Confirmation Box -->
+    <div id="confirmation-box" class="confirmation-box" style="display: none;"></div>
+</body>
+</html>

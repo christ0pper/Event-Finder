@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>Contact Us</h1>
+        <p>Get in touch with us for any queries or support!</p>
+    </header>
+
+    <section class="contact-info">
+        <h2>Contact Information</h2>
+        <p>If you have any questions or need support, feel free to contact us:</p>
+        <div class="info-item">
+            <strong>Phone:</strong> <a href="tel:+1234567890">+1 234 567 890</a>
+        </div>
+        <div class="info-item">
+            <strong>Email:</strong> <a href="mailto:eventure@gmail.com">eventure@gmail.com</a>
+        </div>
+    </section>
+
+    <section class="contact-form">
+        <h2>Send Us a Message</h2>
+        <form action="/contact" method="POST"> <!-- Change action to /contact -->
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+</body>
+<footer>
+    <p>&copy; 2024 Eventure. All rights reserved.</p>
+</footer>
+</html>
